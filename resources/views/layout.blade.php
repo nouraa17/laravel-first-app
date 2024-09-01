@@ -31,12 +31,12 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 @guest()
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="{{route('login')}}">Login</a>
                 </li>
                 @endguest
                 @auth()
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                 </li>
                 @endauth
             </ul>

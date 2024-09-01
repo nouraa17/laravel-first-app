@@ -81,28 +81,4 @@ class UsersController extends Controller
     }
 
 
-    public function register()
-    {
-
-        return view('register');
-
-    }
-    public function register_submit(RegisterFormRequest $request)
-    {
-//        $this->authorize('create', User::class);
-        $userData = array_merge(
-            $request->validated(),
-            [
-                'type' => 'client',
-                'password' => Hash::make($request->password)
-            ]
-        );
-//        return $userData;
-        User::query()->create($userData);
-        return redirect()->back()->with('success', 'You registered successfully!');
-
-    }
-
-
-
 }

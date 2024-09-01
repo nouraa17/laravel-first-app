@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\UsersController;
-
+use App\Http\Controllers\Auth\RegisterController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -80,7 +84,21 @@ Route::prefix('/contact')->group(function(){
     Route::post('/submit',[ContactController::class,'submit']) -> name('contact.submit');
 });
 
-Route::prefix('/user')->group(function () {
-    Route::get('/register',[UsersController::class,'register']);
-    Route::post('/register-submit',[UsersController::class,'register_submit'])->name('register.submit');
+Route::group(['prefix'=>'/auth'],function () {
+
+    Route::get('/register',[RegisterController::class,'index']);
+    Route::post('/register-post',[RegisterController::class,'save'])->name('auth.register');
+
+    Route::get('/login',[LoginController::class,'index'])->name('login');
+    Route::post('/login-post',[LoginController::class,'save'])->name('auth.login');
+
 });
+Route::get('/logout',[LogoutController::class,'logout_system'])->middleware('auth');
+
+Route::group(['prefix'=>'/dashboard'],function () {
+    Route::get('/users',[DashboardController::class,'users']);
+
+});
+
+Route::get('/delete', [DeleteController::class, 'delete'])->name('delete');
+

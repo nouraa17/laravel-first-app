@@ -5,11 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contact extends Model
+class Images extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'username',
-        'title',
-        'message'];
+        'imageable_id',
+        'imageable_type',
+        'name'];
+
+
+    public function imageable()
+    {
+        return $this->morphTo();
+    }
 }
