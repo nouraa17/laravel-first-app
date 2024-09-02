@@ -86,7 +86,7 @@ Route::prefix('/contact')->group(function(){
 
 Route::group(['prefix'=>'/auth'],function () {
 
-    Route::get('/register',[RegisterController::class,'index']);
+    Route::get('/register',[RegisterController::class,'index'])->name('register');
     Route::post('/register-post',[RegisterController::class,'save'])->name('auth.register');
 
     Route::get('/login',[LoginController::class,'index'])->name('login');
@@ -95,8 +95,14 @@ Route::group(['prefix'=>'/auth'],function () {
 });
 Route::get('/logout',[LogoutController::class,'logout_system'])->middleware('auth');
 
-Route::group(['prefix'=>'/dashboard'],function () {
-    Route::get('/users',[DashboardController::class,'users']);
+Route::group(['prefix'=>'/dashboard', 'middleware' => 'admin'],function () {
+    Route::get('/users',[DashboardController::class,'users'])->name('dashboard.users');
+    Route::get('/contacts',[DashboardController::class,'contacts'])->name('dashboard.contacts');
+    Route::get('/edit-user/{id}',[DashboardController::class,'edit_user'])->name('dashboard.edit.user');
+    Route::put('/update-user/{id}',[DashboardController::class,'update_user'])->name('dashboard.update.user');
+    // web.php
+//    Route::get('/dashboard/users/{id}/edit', [UserController::class, 'edit'])->name('dashboard.edit.user');
+
 
 });
 

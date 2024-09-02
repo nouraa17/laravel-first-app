@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,8 +21,11 @@ class ContactResource extends JsonResource
             'username'=>$this->username,
             'title'=>$this->title,
             'message'=>$this->message,
-            'created_at'=>$this->created_at->format('d-m-Y'),
-            'published_at'=>$this->created_at->diffForHumans(),
+//            'created_at'=>$this->created_at->format('d-m-Y'),
+//            'published_at'=>$this->created_at->diffForHumans(),
+
+            'created_at' => Carbon::parse($this->created_at)->format('d-m-Y'),
+            'published_at' => Carbon::parse($this->created_at)->diffForHumans(),
         ];
     }
 }

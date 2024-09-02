@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('admin.admin_layout')
 @section('title','Admin | Users')
 
 @section('content')
@@ -40,7 +40,7 @@
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->type }}</td>
                             <td>{{ $user -> created_at}}</td>
-                            <td><a href="" class="btn btn-primary">Edit</a> <a href="/delete?model_name=users&id={{$user->id}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a></td>
+                            <td><a href="{{route('dashboard.edit.user',$user->id)}}" class="btn btn-primary">Edit</a> <a href="/delete?model_name=users&id={{$user->id}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a></td>
 {{--                            <td><a href="" class="btn btn-primary">Edit</a> <a href="{{route('delete',$user->id)}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a></td>--}}
                         </tr>
                     @endforeach
