@@ -19,6 +19,7 @@ class ProductControllerResource extends Controller
 //        $items->delete();
 //        $products = Product::query()->get();
 //        return $products;
+        ////////////////////////////////////
         return view('products.index');
     }
 
