@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ProductControllerResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\UsersController;
@@ -42,9 +43,9 @@ Route::get('/users', [UsersController::class, 'all_users']);
 Route::view('/home','welcome');
 
 
-Route::get('/products/{id?}',function ($id=null){ // id is optional
-    echo $id;
-})->where('id','[0-9]+');
+//Route::get('/products/{id?}',function ($id=null){ // id is optional
+//    echo $id;
+//})->where('id','[0-9]+');
 
 Route::prefix('/dashboard')->group(function(){
     Route::get('/',function (){
@@ -108,3 +109,6 @@ Route::group(['prefix'=>'/dashboard', 'middleware' => 'admin'],function () {
 
 Route::get('/delete', [DeleteController::class, 'delete'])->name('delete');
 
+Route::resources([
+    'products' => ProductControllerResource::class
+]);

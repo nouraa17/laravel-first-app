@@ -1,0 +1,12 @@
+php artisan serve
+php artisan optimize
+php artisan make:controller ProductControllerResource --resource
+php artisan make:model Product -m
+php artisan migrate
+php artisan migrate:fresh
+php artisan route:list
+php artisan make:request ProductFormRequest
+php artisan make:resource ProductResource
+php artisan make:controller Auth/LoginController
+php artisan make:event SaveProductEvent
+php artisan make:listener SaveProductImagesListener

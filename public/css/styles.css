@@ -11,3 +11,10 @@ table tr td img{
     width: 40px;
     object-fit: contain;
 }
+
+.simulation img{
+    display: block;
+    margin: 10px;
+    width: 200px;
+    height: 200px;
+}
