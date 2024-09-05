@@ -20,7 +20,8 @@ class ProductControllerResource extends Controller
 //        $products = Product::query()->get();
 //        return $products;
         ////////////////////////////////////
-        return view('products.index');
+        $products = Product::all();
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -28,7 +29,9 @@ class ProductControllerResource extends Controller
      */
     public function create()
     {
-        return view('products.save');
+        $title = 'Create';
+        $routeName = ['products.store'];
+        return view('products.save', ['title'=>$title, 'routeName'=>$routeName,'edit'=>false]);
     }
 
     /**
@@ -55,7 +58,16 @@ class ProductControllerResource extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::find($id);
+        // Debugging the product object
+//         dd($product);
+
+        $title = 'Edit';
+        $edit = true;
+        $routeName = ['products.update', $product->id];
+
+        // Pass variables using compact
+        return view('products.save', compact('title', 'routeName', 'edit', 'product'));
     }
 
     /**

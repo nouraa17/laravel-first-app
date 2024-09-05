@@ -111,4 +111,5 @@ Route::get('/delete', [DeleteController::class, 'delete'])->name('delete');
 
 Route::resources([
     'products' => ProductControllerResource::class
-]);
+], ['middleware' => 'admin'],
+);

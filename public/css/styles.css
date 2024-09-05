@@ -13,8 +13,69 @@ table tr td img{
 }
 
 .simulation img{
-    display: block;
-    margin: 10px;
-    width: 200px;
-    height: 200px;
+    display: block !important;
+    width: 90% !important;
+    height: 300px !important;
+    margin: auto;
 }
+.simulation img:first-of-type{
+    width: 90% !important;
+    height:300px !important;
+}
+
+
+.info span:first-of-type{
+    color: green;
+    display: block;
+    font-size: 18px;
+    font-weight: 800;
+    font-family: cursive;
+    background-color: #efffea;
+    padding: 10px;
+}
+.info span:last-of-type{
+    color: #2d3c4a;
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+    font-family: cursive;
+    padding: 10px;
+}
+
+.star {
+    width: 25px;
+    height: 25px;
+    background: #ffb700;
+    clip-path: polygon(
+        50% 0%,   /* Top */
+        61% 35%,  /* Top-right */
+        98% 35%,  /* Far-right */
+        68% 57%,  /* Bottom-right */
+        79% 91%,  /* Bottom-right tip */
+        50% 70%,  /* Bottom */
+        21% 91%,  /* Bottom-left tip */
+        32% 57%,  /* Bottom-left */
+        2% 35%,   /* Far-left */
+        39% 35%   /* Top-left */
+    );
+    display: inline-block;
+    margin: auto -5px;
+}
+.star-half {
+    width: 25px;
+    height: 25px;
+    background: #ffb700;
+    clip-path: polygon(
+        50% 0%,   /* Top */
+        61% 35%,  /* Top-right */
+        98% 35%,  /* Far-right */
+        68% 57%,  /* Bottom-right */
+        79% 91%,  /* Bottom-right tip */
+        50% 70%,  /* Bottom */
+        21% 91%,  /* Bottom-left tip */
+        32% 57%,  /* Bottom-left */
+        2% 35%,   /* Far-left */
+        39% 35%   /* Top-left */
+    );
+}
+

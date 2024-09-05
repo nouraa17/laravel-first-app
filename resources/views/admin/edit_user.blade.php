@@ -14,7 +14,6 @@
             <form method="post" action="{{route('dashboard.update.user', $user->id)}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-
                 <div class="mb-3">
                     <label>Username</label>
                     <input class="form-control" name="username" value="{{ $user->username }}">

@@ -14,6 +14,7 @@ if(document.URL.slice('product')[1]){
         for(let file of event.target.files){
             let img = document.createElement('img');
             img.src= URL.createObjectURL(file);
+            img.className= 'card-img-top'
             simulation_images.append(img)
         }
     }
