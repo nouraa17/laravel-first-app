@@ -12,4 +12,9 @@ class Product extends Model
     use SoftDeletes;
 
     protected $fillable = ['user_id', 'name', 'info', 'price'];
+
+    public function images()
+    {
+        return $this->morphMany(Images::class,'imageable');
+    }
 }

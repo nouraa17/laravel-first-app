@@ -19,14 +19,22 @@ class ProductFormRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+
+    public function my_rules()
     {
-        return [
+        $arr = [
             'name' => 'required',
             'info' => 'required',
             'price' => 'required|numeric',
-            'images' => 'required|array',
-            'images.*' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
+        if ($this->getRequestUri() == '/products'){
+            $arr['images'] = 'required|array';
+            $arr['images.*'] = 'required|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        }
+        return $arr;
+    }
+    public function rules(): array
+    {
+        return $this->my_rules();
     }
 }

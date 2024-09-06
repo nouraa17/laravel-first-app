@@ -12,18 +12,20 @@ table tr td img{
     object-fit: contain;
 }
 
-.simulation img{
-    display: block !important;
-    width: 90% !important;
-    height: 300px !important;
-    margin: auto;
-}
-.simulation img:first-of-type{
-    width: 90% !important;
-    height:300px !important;
-}
+/*.simulation img{*/
+/*    display: block !important;*/
+/*    width: 90% !important;*/
+/*    height: 300px !important;*/
+/*    margin: auto;*/
+/*}*/
+/*.simulation img:first-of-type{*/
+/*    width: 90% !important;*/
+/*    height:300px !important;*/
+/*}*/
 
-
+.card-img-top{
+    height: 300px;
+}
 .info span:first-of-type{
     color: green;
     display: block;
@@ -77,5 +79,19 @@ table tr td img{
         2% 35%,   /* Far-left */
         39% 35%   /* Top-left */
     );
+}
+
+.form-images img{
+    height: 90px;
+    width: 90px;
+}
+.form-images span , .form-images a{
+    text-decoration: none;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: white !important;
+    cursor: pointer;
+
 }
 

@@ -6,6 +6,7 @@ use App\Events\SaveProductEvent;
 use App\Http\Requests\ProductFormRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProductControllerResource extends Controller
@@ -20,7 +21,12 @@ class ProductControllerResource extends Controller
 //        $products = Product::query()->get();
 //        return $products;
         ////////////////////////////////////
-        $products = Product::all();
+        $products = Product::query()->with('images')->get();
+        foreach ($products as $product){
+            if($product->images->count() <= 0){
+                $product = null;
+            }
+        }
         return view('products.index', compact('products'));
     }
 
@@ -58,13 +64,17 @@ class ProductControllerResource extends Controller
      */
     public function edit(string $id)
     {
-        $product = Product::find($id);
+        $product = Product::query()->with('images')->find($id);
         // Debugging the product object
 //         dd($product);
+
 
         $title = 'Edit';
         $edit = true;
         $routeName = ['products.update', $product->id];
+        if($product==null || $product->user_id != auth()->id() || auth()->user()->type != 'admin'){
+            return redirect()->to('/products');
+        }
 
         // Pass variables using compact
         return view('products.save', compact('title', 'routeName', 'edit', 'product'));
@@ -75,7 +85,20 @@ class ProductControllerResource extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::beginTransaction();
+
+        $product = Product::query()->with('images')->find($id);
+        if((sizeof($product->images)==0) && (request()->hasFile('images')==false)){
+            return redirect()->back()->withErrors(['error' => 'You should upload at least one image']);
+        }
+        $basic_data = request()->except('images');
+        $basic_data['id'] = $id;
+        $basic_data['user_id'] = $product->user_id;
+
+        event(new SaveProductEvent($basic_data, request()->file('images') ?? [], false));
+        DB::commit();
+
+        return redirect()->back()->with('success', 'Product Updated Successfully');
     }
 
     /**
