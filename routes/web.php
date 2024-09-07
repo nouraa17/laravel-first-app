@@ -111,5 +111,10 @@ Route::get('/delete', [DeleteController::class, 'delete'])->name('delete');
 
 Route::resources([
     'products' => ProductControllerResource::class
-], ['middleware' => 'admin'],
+
+]
+//    , ['middleware' => 'auth'],
 );
+
+Route::get('products/{id}/buy', [ProductControllerResource::class, 'showBuyPage'])->name('products.buy');
+Route::post('products/{id}/checkout', [ProductControllerResource::class, 'checkout'])->name('products.checkout');

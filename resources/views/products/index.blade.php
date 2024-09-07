@@ -15,7 +15,9 @@
                                     @endforeach
                                 </div>
                                 <div class="card-body" style="overflow: hidden">
-                                    <a href="{{route('products.edit',$product->id)}}" class="text-danger fs-4"><i class="float-end ri-edit-2-fill"></i></a>
+                                    @if(auth()->user()->type == 'admin' || auth()->user()->id == $product->user_id)
+                                        <a href="{{route('products.edit',$product->id)}}" class="text-danger fs-4"><i class="float-end ri-edit-2-fill"></i></a>
+                                    @endif
                                     <div class="info text-center">
                                         <p>
                                             <span class="mt-5">Name:</span>
@@ -34,7 +36,9 @@
                                         <div class="star"></div>
                                         <div class="star"></div>
                                         <div style="width: 16px; overflow: hidden; display: inline-block;margin:auto -5px;"><div class="star-half"></div></div>
-                                        <a href="{{route('products.edit',$product->id)}}" class="btn m-auto" style="background-color: orange; display: block;"> Buy Now <i class="ri-shopping-cart-fill"></i></a>
+                                        @if(!(auth()->user()->type == 'admin' || auth()->user()->id == $product->user_id))
+                                            <a href="{{route('products.buy',$product->id)}}" class="btn m-auto" style="background-color: orange; display: block;"> Buy Now <i class="ri-shopping-cart-fill"></i></a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

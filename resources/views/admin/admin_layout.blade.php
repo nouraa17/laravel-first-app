@@ -24,6 +24,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('dashboard.contacts')}}">Contacts</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Products</a>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 @guest()

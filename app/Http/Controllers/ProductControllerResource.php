@@ -4,16 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Events\SaveProductEvent;
 use App\Http\Requests\ProductFormRequest;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Services\Orders\SaveOrderService;
 
 class ProductControllerResource extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+
+    }
+
+
     public function index()
     {
 //        $items = Product::query()->first();
@@ -83,7 +93,7 @@ class ProductControllerResource extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductFormRequest $request, string $id)
     {
         DB::beginTransaction();
 
@@ -107,5 +117,26 @@ class ProductControllerResource extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+
+    public function showBuyPage($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('products.buy', compact('product'));
+    }
+
+    public function checkout(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $quantity = $request->input('quantity');
+        SaveOrderService::createOrder(auth()->id(), $product, $quantity);
+
+
+        return redirect()->back()->with('success', 'Order placed successfully!');
+
+
     }
 }
